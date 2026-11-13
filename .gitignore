@@ -60,4 +60,7 @@ java/examination/app/bin/
 *.swo
 .DS_Store
 
+# NIX Specific
+.direnv/
+
 

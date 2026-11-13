@@ -2,40 +2,40 @@ package com.lab;
 
 // Buggy 3: Wrong exception message for short passwords
 public class BugWrongExceptionMessage implements IPassword {
-    protected int passwordHash;
+  protected int passwordHash;
 
-    public BugWrongExceptionMessage(String pw) throws Exception {
-        String trimmedPW = pw.trim();
-        if (isToShort(trimmedPW)) {
-            throw new Exception("Wrong message");  // Bug: incorrect message
-        }
-        if (containsNumber(trimmedPW) == false) {
-            throw new Exception("Does not contain a number");
-        }
-        this.passwordHash = simpleHash(trimmedPW);
+  public BugWrongExceptionMessage(String pw) throws Exception {
+    String trimmedPW = pw.trim();
+    if (isToShort(trimmedPW)) {
+      throw new Exception("Wrong message"); // Bug: incorrect message
     }
-    
-    private int simpleHash(String input) {
-        int hash = 7;
-        for (int i = 0; i < input.length(); i++) {
-            hash = hash * 31 + input.charAt(i);
-        }
-        return hash;
+    if (containsNumber(trimmedPW) == false) {
+      throw new Exception("Does not contain a number");
     }
-    
-    private boolean isToShort(String pw) {
-        return pw.length() < 12;
+    this.passwordHash = simpleHash(trimmedPW);
+  }
+
+  private int simpleHash(String input) {
+    int hash = 7;
+    for (int i = 0; i < input.length(); i++) {
+      hash = hash * 31 + input.charAt(i);
     }
-    
-    private boolean containsNumber(String text) {
-        return text.matches(".*\\d.*");
-    }
-    
-    public int getPasswordHash() {
-        return this.passwordHash;
-    }
-    
-    public boolean isPasswordSame(IPassword other) {
-        return this.passwordHash == other.getPasswordHash();
-    }
+    return hash;
+  }
+
+  private boolean isToShort(String pw) {
+    return pw.length() < 12;
+  }
+
+  private boolean containsNumber(String text) {
+    return text.matches(".*\\d.*");
+  }
+
+  public int getPasswordHash() {
+    return this.passwordHash;
+  }
+
+  public boolean isPasswordSame(IPassword other) {
+    return this.passwordHash == other.getPasswordHash();
+  }
 }
